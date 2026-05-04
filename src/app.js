@@ -1,6 +1,5 @@
 const cors = require("cors");
 const express = require("express");
-const swaggerUi = require("swagger-ui-express");
 const swaggerSpec = require("./config/swagger");
 const authRoutes = require("./routes/authRoutes");
 const productRoutes = require("./routes/productRoutes");
@@ -21,7 +20,36 @@ app.get("/", (req, res) => {
     .json({ success: true, message: "Accessories E-commerce API is running" });
 });
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.get("/swagger.json", (req, res) => {
+  res.status(200).json(swaggerSpec);
+});
+
+app.get("/api-docs", (req, res) => {
+  res.status(200).send(`
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accessories E-commerce API Docs</title>
+    <link rel="stylesheet" href="https://unpkg.com/swagger-ui-dist/swagger-ui.css" />
+  </head>
+  <body>
+    <div id="swagger-ui"></div>
+    <script src="https://unpkg.com/swagger-ui-dist/swagger-ui-bundle.js"></script>
+    <script>
+      window.onload = function () {
+        window.ui = SwaggerUIBundle({
+          url: "/swagger.json",
+          dom_id: "#swagger-ui"
+        });
+      };
+    </script>
+  </body>
+</html>
+`);
+});
+
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/cart", cartRoutes);
