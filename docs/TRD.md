@@ -14,7 +14,7 @@ The backend uses an MVC-like structure:
 
 - `src/app.js` configures Express middleware and routes.
 - `src/server.js` starts the server and connects to MongoDB.
-- `src/config/db.js` connects to the local MongoDB database.
+- `src/config/db.js` connects to MongoDB Atlas using `process.env.MONGO_URI`.
 - `src/config/swagger.js` configures Swagger API docs.
 
 ## Tools and Libraries
@@ -30,11 +30,23 @@ The backend uses an MVC-like structure:
 
 ## Database
 
-The app uses local MongoDB:
+The app uses MongoDB Atlas. The connection string is loaded from environment variables using `dotenv` and must be stored only in the ignored `.env` file.
 
 ```text
-mongodb://127.0.0.1:27017/accessories_ecommerce
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster-url>/accessories_ecommerce?retryWrites=true&w=majority&appName=Cluster0
 ```
+
+The `.env` file is ignored by Git and must never be committed. The `.env.example` file contains safe placeholder values only and must not include real usernames, passwords, or connection strings.
+
+The database name is `accessories_ecommerce`. MongoDB Atlas automatically creates the database and collections after the first successful document insert.
+
+Main collections:
+
+- `users`
+- `products`
+- `carts`
+- `orders`
+- `feedbacks`
 
 ## JWT Authentication
 
@@ -46,7 +58,7 @@ Passwords are hashed in the User model before saving using Mongoose pre-save mid
 
 ## dotenv Environment Variables
 
-Important configuration values are stored in `.env`, including `PORT`, `MONGO_URI`, `JWT_SECRET`, and `NODE_ENV`.
+Important configuration values are stored in `.env`, including `PORT`, `MONGO_URI`, `JWT_SECRET`, and `NODE_ENV`. Real secrets must stay only in `.env`; documentation and `.env.example` must use placeholders.
 
 ## Middleware Structure
 

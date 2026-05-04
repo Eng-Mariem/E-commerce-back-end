@@ -1,6 +1,6 @@
 # Accessories E-commerce Backend
 
-A clean, beginner-friendly Node.js backend for an accessories e-commerce web application. The project uses Express.js, local MongoDB, Mongoose, JWT authentication, bcrypt password hashing, Swagger documentation, and Jest/Supertest tests.
+A clean, beginner-friendly Node.js backend for an accessories e-commerce web application. The project uses Express.js, MongoDB Atlas, Mongoose, JWT authentication, bcrypt password hashing, Swagger documentation, and Jest/Supertest tests.
 
 ## Features
 
@@ -21,7 +21,7 @@ A clean, beginner-friendly Node.js backend for an accessories e-commerce web app
 
 - Node.js
 - Express.js
-- MongoDB Local
+- MongoDB Atlas
 - Mongoose
 - JWT
 - bcrypt
@@ -64,12 +64,14 @@ backend/
 npm install
 ```
 
-3. Make sure local MongoDB is running on your computer.
-4. Check `.env` and confirm the connection string:
+3. Create a `.env` file from `.env.example`.
+4. Add your real MongoDB Atlas connection string only in `.env`:
 
 ```env
-MONGO_URI=mongodb://127.0.0.1:27017/accessories_ecommerce
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster-url>/accessories_ecommerce?retryWrites=true&w=majority&appName=Cluster0
 ```
+
+The real `.env` file is ignored by Git and must never be committed.
 
 ## How to Run the Project
 
@@ -104,10 +106,12 @@ Expected response:
 
 ```env
 PORT=5000
-MONGO_URI=mongodb://127.0.0.1:27017/accessories_ecommerce
-JWT_SECRET=accessories_secret_key
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster-url>/accessories_ecommerce?retryWrites=true&w=majority&appName=Cluster0
+JWT_SECRET=your_jwt_secret_here
 NODE_ENV=development
 ```
+
+The backend loads configuration from environment variables using `dotenv`. Store the real MongoDB Atlas URI only in `.env`. The `.env.example` file contains safe placeholder values only and must not include real usernames, passwords, or connection strings.
 
 ## API Endpoints Summary
 
@@ -175,15 +179,23 @@ npm test
 
 Tests use Jest, Supertest, and an in-memory MongoDB database.
 
-## Local MongoDB Usage
+## MongoDB Atlas Usage
 
-This project uses local MongoDB with this database:
+This project uses MongoDB Atlas through `process.env.MONGO_URI`.
 
 ```text
-mongodb://127.0.0.1:27017/accessories_ecommerce
+MONGO_URI=mongodb+srv://<username>:<password>@<cluster-url>/accessories_ecommerce?retryWrites=true&w=majority&appName=Cluster0
 ```
 
-Make sure MongoDB service is running before using `npm start` or `npm run dev`.
+The database name is `accessories_ecommerce`. MongoDB Atlas automatically creates the database and collections after the first successful document insert.
+
+Main collections:
+
+- `users`
+- `products`
+- `carts`
+- `orders`
+- `feedbacks`
 
 ## Other Scripts
 
