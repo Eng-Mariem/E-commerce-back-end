@@ -2,6 +2,17 @@
 
 A clean, beginner-friendly Node.js backend for an accessories e-commerce web application. The project uses Express.js, MongoDB Atlas, Mongoose, JWT authentication, bcrypt password hashing, Swagger documentation, and Jest/Supertest tests.
 
+## Live Deployment
+
+- **Live backend URL:** `https://e-commerce-back-end-sage.vercel.app`
+- **API base URL:** `https://e-commerce-back-end-sage.vercel.app/api`
+- **Swagger URL:** `https://e-commerce-back-end-sage.vercel.app/api-docs`
+- **Swagger JSON:** `https://e-commerce-back-end-sage.vercel.app/swagger.json`
+
+## GitHub Repo Usage
+
+Clone the repository, install dependencies, create a local `.env` file from `.env.example`, then run the backend locally. The real `.env` file is ignored by Git and must never be committed.
+
 ## Features
 
 - User registration and login
@@ -30,7 +41,6 @@ A clean, beginner-friendly Node.js backend for an accessories e-commerce web app
 - nodemon
 - jest
 - supertest
-- swagger-ui-express
 - swagger-jsdoc
 
 ## Folder Structure
@@ -104,6 +114,8 @@ Expected response:
 
 ## Environment Variables
 
+Create a `.env` file locally with these values:
+
 ```env
 PORT=5000
 MONGO_URI=mongodb+srv://<username>:<password>@<cluster-url>/accessories_ecommerce?retryWrites=true&w=majority&appName=Cluster0
@@ -112,6 +124,8 @@ NODE_ENV=development
 ```
 
 The backend loads configuration from environment variables using `dotenv`. Store the real MongoDB Atlas URI only in `.env`. The `.env.example` file contains safe placeholder values only and must not include real usernames, passwords, or connection strings.
+
+For Vercel deployment, add the same secret values in the Vercel project Environment Variables settings. Do not put real secrets in source code, README files, or documentation.
 
 ## API Endpoints Summary
 
@@ -167,6 +181,12 @@ Run the server and open:
 
 ```text
 http://localhost:5000/api-docs
+```
+
+Live Swagger:
+
+```text
+https://e-commerce-back-end-sage.vercel.app/api-docs
 ```
 
 ## How to Test the Project

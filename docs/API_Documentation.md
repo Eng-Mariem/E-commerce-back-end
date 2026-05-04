@@ -1,6 +1,12 @@
 # API Documentation
 
-Base URL: `http://localhost:5000`
+Live Backend URL: `https://e-commerce-back-end-sage.vercel.app`
+
+API Base URL: `https://e-commerce-back-end-sage.vercel.app/api`
+
+Local Base URL: `http://localhost:5000`
+
+Swagger URL: `https://e-commerce-back-end-sage.vercel.app/api-docs`
 
 For protected routes, send:
 

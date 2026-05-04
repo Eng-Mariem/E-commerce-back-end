@@ -26,7 +26,8 @@ The backend uses an MVC-like structure:
 - dotenv for environment variables.
 - cors for cross-origin requests.
 - jest and supertest for tests.
-- swagger-ui-express and swagger-jsdoc for API documentation.
+- swagger-jsdoc and a CDN-based Swagger UI page for API documentation.
+- Vercel for backend deployment.
 
 ## Database
 
@@ -59,6 +60,16 @@ Passwords are hashed in the User model before saving using Mongoose pre-save mid
 ## dotenv Environment Variables
 
 Important configuration values are stored in `.env`, including `PORT`, `MONGO_URI`, `JWT_SECRET`, and `NODE_ENV`. Real secrets must stay only in `.env`; documentation and `.env.example` must use placeholders.
+
+## Deployment
+
+The backend is deployed to Vercel as an Express API using `api/index.js` as the serverless entry point and `vercel.json` for request routing.
+
+Live backend:
+
+```text
+https://e-commerce-back-end-sage.vercel.app
+```
 
 ## Middleware Structure
 

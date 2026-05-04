@@ -16,6 +16,26 @@ Accessories E-commerce Backend is a Node.js and Express.js API for selling acces
 
 The backend covers authentication, products, carts, orders, feedback, error handling, Swagger documentation, and basic API tests.
 
+## Deployment
+
+The backend is deployed on Vercel:
+
+```text
+https://e-commerce-back-end-sage.vercel.app
+```
+
+The API base URL is:
+
+```text
+https://e-commerce-back-end-sage.vercel.app/api
+```
+
+Swagger documentation is available at:
+
+```text
+https://e-commerce-back-end-sage.vercel.app/api-docs
+```
+
 ## Entities and Roles
 
 ### User

@@ -11,6 +11,9 @@ const options = {
     },
     servers: [
       {
+        url: "https://e-commerce-back-end-sage.vercel.app",
+      },
+      {
         url: "http://localhost:5000",
       },
     ],
