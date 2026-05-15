@@ -1,5 +1,6 @@
 const Cart = require("../models/Cart");
 const Order = require("../models/Order");
+const Product = require("../models/Product");
 
 const createOrder = async (req, res, next) => {
   try {
@@ -17,12 +18,38 @@ const createOrder = async (req, res, next) => {
       return res.status(400).json({ success: false, message: "Cart is empty" });
     }
 
+    const productsToUpdate = [];
+
+    for (const item of cart.items) {
+      const product = await Product.findById(item.product);
+
+      if (!product || !product.isActive) {
+        return res
+          .status(400)
+          .json({ success: false, message: "Product is unavailable" });
+      }
+
+      if (product.stock < item.quantity) {
+        return res.status(400).json({
+          success: false,
+          message: `Insufficient stock for ${product.name}`,
+        });
+      }
+
+      productsToUpdate.push({ product, quantity: item.quantity });
+    }
+
     const order = await Order.create({
       user: req.user._id,
       items: cart.items,
       totalPrice: cart.totalPrice,
       shippingAddress,
     });
+
+    for (const item of productsToUpdate) {
+      item.product.stock -= item.quantity;
+      await item.product.save();
+    }
 
     cart.items = [];
     cart.totalPrice = 0;
